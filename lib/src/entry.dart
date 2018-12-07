@@ -91,17 +91,21 @@ class HarResponse {
   HarResponse(BaseResponse this._r);
 
   Map<String, dynamic> toJson() {
-    return {
+    var _t = {
       'status': _r.statusCode,
       'statusText': _r.reasonPhrase,
       'httpVersion': 'HTTP/1.1',
       'cookies': [],
       'headers': List.from(_r.headers.entries.map((el) => Header(el.key, el.value))),
       'content': {},
-      'redirectUrl': _r.headers['Location'],
+      'redirectUrl': '',
       'headerSize': -1,
-      'bodySize': -1,
+      'bodySize': _r.contentLength,
     };
+    if (_r.headers.containsKey('Location')) {
+      _t['redirectUrl'] = _r.headers['Location'];
+    }
+    return _t;
   }
 }
 
