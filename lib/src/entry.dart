@@ -24,7 +24,7 @@ class HarRequest {
       'httpVersion': 'HTTP/1.1',
       'cookies': [],
       'headers': List.from(_r.headers.entries.map((el) => Header(el.key, el.value))),
-      'querystring': [],
+      'querystring': List.from(_r.url.queryParameters.entries.map((el) => QueryString(el.key, el.value))),
       'headersize': -1,
       'bodySize': _r.contentLength,
     };
@@ -53,12 +53,17 @@ class Header {
   }
 }
 
-class queryString {
+class QueryString {
   String name;
   String value;
+  QueryString(this.name, this.value);
+
+  Map<String, String> toJson() {
+    return {'name': name, 'value': value};
+  }
 }
 
-class postData {
+class PostData {
   String mimetype;
   List<PostParameter> params; // case of url-encoded parameters
   String text; // Plain text posted data
