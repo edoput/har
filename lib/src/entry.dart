@@ -23,10 +23,10 @@ class HarRequest {
       'url': _r.url.host,
       'httpVersion': 'HTTP/1.1',
       'cookies': [],
-      'headers': [],
+      'headers': List.from(_r.headers.entries.map((el) => Header(el.key, el.value))),
       'querystring': [],
       'headersize': -1,
-      'bodySize': -1,
+      'bodySize': _r.contentLength,
     };
   }
 }
@@ -46,6 +46,11 @@ class Header {
   String name;
   String value;
   String comment;
+  Header(this.name, this.value);
+
+  Map<String, String> toJson() {
+    return {'name': name, 'value': value};
+  }
 }
 
 class queryString {
@@ -86,7 +91,7 @@ class HarResponse {
       'statusText': _r.reasonPhrase,
       'httpVersion': 'HTTP/1.1',
       'cookies': [],
-      'headers': [],
+      'headers': List.from(_r.headers.entries.map((el) => Header(el.key, el.value))),
       'content': {},
       'redirectUrl': _r.headers['Location'],
       'headerSize': -1,
