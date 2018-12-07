@@ -124,8 +124,8 @@ class Entry {
   int time;
   BaseRequest _request;
   BaseResponse _response;
-  Map<String, dynamic> cache = new Map();
-  Map<String, dynamic> timings = new Map();
+  Map<String, dynamic> cache = {};
+  Map<String, dynamic> timings = {};
 
   Map<String, dynamic> toJson() => {
     'time': time,
