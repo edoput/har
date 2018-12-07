@@ -1,0 +1,15 @@
+name: har
+version: 1.0.0+1
+description: >-
+  Tired of debugging HTTP interactions with print?
+  Dump all your interactions as an HAR file and import it
+  into your browser devtools of choice!
+authors:
+  - Edoardo Putti <edoardo.putti@gmail.com>
+homepage: http://github.com/edoput/har
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+dependencies:
+  http: "^0.12.0"
+  intl: "^0.15.0"
+publish_to: none
