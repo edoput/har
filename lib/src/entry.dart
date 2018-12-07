@@ -1,19 +1,15 @@
 import 'package:intl/intl.dart';
 import 'package:http/http.dart';
 
+import './kv.dart';
+
 class CacheUsage {}
 
 class HarRequest {
   BaseRequest _r;
-  // method
-  // url
-  // httpVersion
   // cookies []
-  // headers []
-  // querystring []
   // postData:  optional
   // headerSize: -1 if not available
-  // bodySize: -1 if not available
 
   HarRequest(BaseRequest this._r);
 
@@ -32,37 +28,6 @@ class HarRequest {
 }
 
 
-class Cookies {
-  // String name
-  // String value
-  // String path: optional
-  // String domain: optional
-  // DateTime expires: optional, ISO 8601 datetime
-  // bool httpOnly: optional
-  // bool secure: optional
-}
-
-class Header {
-  String name;
-  String value;
-  String comment;
-  Header(this.name, this.value);
-
-  Map<String, String> toJson() {
-    return {'name': name, 'value': value};
-  }
-}
-
-class QueryString {
-  String name;
-  String value;
-  QueryString(this.name, this.value);
-
-  Map<String, String> toJson() {
-    return {'name': name, 'value': value};
-  }
-}
-
 class PostData {
   String mimetype;
   List<PostParameter> params; // case of url-encoded parameters
@@ -78,15 +43,9 @@ class PostParameter {
 
 class HarResponse {
   BaseResponse _r;
-  // status
-  // statusText
-  // httpVersion
   // cookies []
-  // headers []
   // content {}
-  // redirectURL: Location response header
   // headerSize: -1 if not available
-  // bodySize: -1 if not available
 
   HarResponse(BaseResponse this._r);
 
