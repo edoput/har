@@ -14,4 +14,3 @@ dependencies:
   intl: "^0.15.0"
 dev_dependencies:
   args: "^1.5.1"
-publish_to: none
