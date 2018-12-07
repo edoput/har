@@ -12,18 +12,30 @@ class Entry {
   int time;
   BaseRequest _request;
   BaseResponse _response;
-  Map<String, dynamic> cache = {};
-  Map<String, dynamic> timings = {};
-
-  Map<String, dynamic> toJson() => {
-    'time': time,
-    //'startedDateTime': dateFormat.format(startedDateTime),
-    //'startedDateTime': startedDateTime,
-    'cache': cache,
-    'timings': timings,
-    'request': HarRequest(_request),
-    'response': HarResponse(_response),
+  final cache = {
+    'beforeRequest': null,
+    'afterRequest': null,
   };
+  final timings = {
+   'send': 0,
+   'wait': 0,
+   'receive': 0,
+  };
+
+  Map<String, dynamic> toJson() {
+    var t = {
+       'time': time,
+       //'startedDateTime': dateFormat.format(startedDateTime),
+       //'startedDateTime': startedDateTime,
+       'cache': cache,
+       'timings': timings,
+       'startedDateTime': DateFormat("y-MM-ddTH:mm:ss.000+01:00").format(startedDateTime)
+       'request': HarRequest(_request).toJson(),
+       'response': HarResponse(_response).toJson(),
+    };
+    return t;
+ }
+
 
   Entry() {
     startedDateTime = DateTime.now();
