@@ -14,13 +14,14 @@ class HarRequest {
 
   Map<String, dynamic> toJson() {
     var t = {
+      'pageref': 'page_0',
       'method': _r.method,
       'url': _r.url.host,
       'httpVersion': 'HTTP/1.1',
       'cookies': [],
       'headers': List.from(_r.headers.entries.map((el) => Header(el.key, el.value))),
-      'querystring': List.from(_r.url.queryParameters.entries.map((el) => QueryString(el.key, el.value))),
-      'headersize': -1,
+      'queryString': List.from(_r.url.queryParameters.entries.map((el) => QueryString(el.key, el.value))),
+      'headersSize': -1,
       'bodySize': _r.contentLength,
     };
     return t;
