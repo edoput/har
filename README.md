@@ -21,6 +21,7 @@ wrapper.toHar();
 Features
 --------
 
+- [ ] Post data
+- [x] Cookies
 - [x] Headers
 - [x] Query strings
-- [ ] Post data

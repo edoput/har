@@ -2,6 +2,19 @@ import 'package:http/http.dart';
 
 import './kv.dart';
 
+List<Cookie> parseCookies (Iterable<MapEntry<String, String>> headers) {
+  bool filterCookie(MapEntry<String, String> header) {
+    return header.key == 'Set-Cookie' || header.key == 'set-cookie';
+  }
+
+  return List.from(headers.where(filterCookie).map((el) => Cookie(el.key, el.value)));
+}
+
+List<Header> parseHeaders (Iterable<MapEntry<String, String>> headers) {
+  return List.from(headers.map((el) => Header(el.key, el.value)));
+}
+
+
 class HarResponse {
   BaseResponse _r;
   // cookies []
@@ -18,8 +31,8 @@ class HarResponse {
     var _t = {
       'bodySize': _r.contentLength,
       'content': content.toJson(),
-      'cookies': [],
-      'headers': List.from(_r.headers.entries.map((el) => Header(el.key, el.value))),
+      'cookies': parseCookies(_r.headers.entries),
+      'headers': parseHeaders(_r.headers.entries),
       'headersSize': -1,
       'httpVersion': 'HTTP/1.1',
       'pageref': 'page_0',
