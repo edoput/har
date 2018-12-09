@@ -29,7 +29,7 @@ class Entry {
        //'startedDateTime': startedDateTime,
        'cache': cache,
        'timings': timings,
-       'startedDateTime': DateFormat("y-MM-ddTH:mm:ss.000+01:00").format(startedDateTime)
+       'startedDateTime': DateFormat("y-MM-ddTH:mm:ss.000+01:00").format(startedDateTime),
        'request': HarRequest(_request).toJson(),
        'response': HarResponse(_response).toJson(),
     };
