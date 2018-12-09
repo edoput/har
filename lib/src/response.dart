@@ -2,22 +2,8 @@ import 'package:http/http.dart';
 
 import './kv.dart';
 
-List<Cookie> parseCookies (Iterable<MapEntry<String, String>> headers) {
-  bool filterCookie(MapEntry<String, String> header) {
-    return header.key == 'Set-Cookie' || header.key == 'set-cookie';
-  }
-
-  return List.from(headers.where(filterCookie).map((el) => Cookie(el.key, el.value)));
-}
-
-List<Header> parseHeaders (Iterable<MapEntry<String, String>> headers) {
-  return List.from(headers.map((el) => Header(el.key, el.value)));
-}
-
-
 class HarResponse {
   BaseResponse _r;
-  // cookies []
   // headerSize: -1 if not available
 
   HarResponse(BaseResponse this._r);
@@ -42,6 +28,8 @@ class HarResponse {
     };
     if (_r.headers.containsKey('Location')) {
       _t['redirectURL'] = _r.headers['Location'];
+    } else if (_r.headers.containsKey('location')) {
+      _t['redirectURL'] = _r.headers['location'];
     }
     return _t;
   }

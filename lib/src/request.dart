@@ -16,11 +16,11 @@ class HarRequest {
     var t = {
       'pageref': 'page_0',
       'method': _r.method,
-      'url': _r.url.host,
+      'url': _r.url.toString(),
       'httpVersion': 'HTTP/1.1',
       'cookies': [],
-      'headers': List.from(_r.headers.entries.map((el) => Header(el.key, el.value))),
-      'queryString': List.from(_r.url.queryParameters.entries.map((el) => QueryString(el.key, el.value))),
+      'headers': parseHeaders(_r.headers.entries),
+      'queryString': parseQueryParams(_r.url.queryParameters.entries),
       'headersSize': -1,
       'bodySize': _r.contentLength,
     };
